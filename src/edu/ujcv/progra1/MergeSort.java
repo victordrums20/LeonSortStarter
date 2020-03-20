@@ -12,12 +12,24 @@ public class MergeSort  implements SortTester{
     }
 
     public static int[] mergeSort(int[] a){
-        return new int[5];
+        if (a.length == 1)
+            return a;
+
+        int[] parteInferior = new int[a.length / 2];
+        int[] parteSuperior = new int[a.length - parteInferior.length];
+        int i = 0;
+
+        for (; i < parteInferior.length; i++) {
+            parteInferior[i] = a[i];
+        }
+
+        for (int j = 0; j < parteSuperior.length; j++) {
+            parteSuperior[j] = a[i + j];
+        }
+
+        return merge(mergeSort(parteInferior),mergeSort(parteSuperior));
     }
 
     public static int[] merge(int[] inf, int[] sup ){
-        return new int[5];
-    }
-
-
+        
 }
