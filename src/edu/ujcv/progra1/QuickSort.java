@@ -5,40 +5,38 @@ public class QuickSort implements SortTester {
     public long sort(int[] arr) {
         long start = System.currentTimeMillis();
         int n = arr.length;
-        quickSort(arr, 0, n-1);
+        quickSort(arr, 0, n - 1);
 
         long end = System.currentTimeMillis();
 
         return end - start;
     }
 
-    public static void quickSort(int[] arr, int start, int end){
-
-        int partition = partition(arr, start, end);
-
-        if(partition-1>start) {
-            quickSort(arr, start, partition - 1);
-        }
-        if(partition+1<end) {
-            quickSort(arr, partition + 1, end);
-        }
-    }
-
-    public static int partition(int[] arr, int start, int end){
-        int pivot = arr[end];
-
-        for(int i=start; i<end; i++){
-            if(arr[i]<pivot){
-                int temp= arr[start];
-                arr[start]=arr[i];
-                arr[i]=temp;
-                start++;
+    public static void quickSort(int[] vector, int izquierda, int derecha) {
+        int pivote = vector[izquierda];
+        int i = izquierda;
+        int j = derecha;
+        int auxIntercambio;
+        while (i < j) {
+            while (vector[i] <= pivote && i < j) {
+                i++;
+            }
+            while (vector[j] > pivote) {
+                j--;
+            }
+            if (i < j) {
+                auxIntercambio = vector[i];
+                vector[i] = vector[j];
+                vector[j] = auxIntercambio;
             }
         }
-        int temp = arr[start];
-        arr[start] = pivot;
-        arr[end] = temp;
-
-        return start;
+        vector[izquierda] = vector[j];
+        vector[j] = pivote;
+        if (izquierda < j - 1) {
+            quickSort(vector, izquierda, j - 1);
+        }
+        if (j + 1 < derecha) {
+            quickSort(vector, j + 1, derecha);
+        }
     }
 }
